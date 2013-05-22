@@ -1,0 +1,39 @@
+---
+driver_plugin: vagrant
+
+platforms:
+- name: ubuntu-12.04
+  driver_config:
+    box: canonical-ubuntu-12.04
+    box_url: http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box
+    require_chef_omnibus: true
+#- name: ubuntu-10.04
+#  driver_config:
+#    box: opscode-ubuntu-10.04
+#    box_url: http://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_chef-11.2.0.box
+#- name: centos-6.3
+#  driver_config:
+#    box: opscode-centos-6.3
+#    box_url: http://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.3_chef-11.2.0.box
+#- name: centos-5.8
+#  driver_config:
+#    box: opscode-centos-5.8
+#    box_url: http://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-5.8_chef-11.2.0.box
+
+suites:
+- name: default
+  run_list: ['recipe[neo4j]']
+#  - 'recipe[apt]'
+#  - 'recipe[java::openjdk]'
+#  - 'recipe[neo4j::default]'
+  attributes:
+    java:
+#      remove_deprecated_packages: true
+      install_flavor: 'openjdk'
+      jdk_version: '7'
+      java_home: '/usr/lib/jvm/java-1.7.0-openjdk-amd64'
+    neo4j:
+      ha:
+        enabled: true
+      coordinator:
+        cluster: ['33.33.33.1', '33.33.33.2']
