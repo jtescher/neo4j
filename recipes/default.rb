@@ -101,12 +101,18 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j-server.properties" do
   group node[:neo4j][:group]
   variables(
     :database_location => node[:neo4j][:database_location],
+    :webserver_address => node[:neo4j][:webserver_address],
     :webserver_port => node[:neo4j][:webserver_port],
-    :conf_dir => "#{node[:neo4j][:neo4j_home]}/conf",
-    :public_address => node[:neo4j][:public_address],
-    :enable_ha => node[:neo4j][:ha][:enable]
+    :webadmin_data_uri => node[:neo4j][:webadmin_data_uri],
+    :webadmin_management_uri => node[:neo4j][:webadmin_management_uri],
+    :enable_ha => node[:neo4j][:ha][:enable],
+    :conf_dir => "#{node[:neo4j][:neo4j_home]}/conf"
   )
 end
+
+coordinator_addresses = node[:neo4j][:coordinator][:cluster].map do |address|
+  "#{address}:#{node[:neo4j][:coordinator][:port]}"
+end.join(',')
 
 # Neo4j instance properties config
 template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
@@ -115,11 +121,8 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
   owner node[:neo4j][:user]
   group node[:neo4j][:group]
   variables(
-    :enable_ha => node[:neo4j][:ha][:enable],
-    :ha_server => "#{node[:neo4j][:ha][:bind_address]}:#{node[:neo4j][:ha][:port]}",
-    :ha_machine_id => node[:neo4j][:ha][:machine_id],
-    :coordinator_port => node[:neo4j][:coordinator][:port],
-    :coordinator_addresses => node[:neo4j][:coordinator][:cluster]
+    :ha_initial_hosts => node[:neo4j][:ha][:initial_hosts],
+    :coordinator_addresses => coordinator_addresses
   )
 end
 

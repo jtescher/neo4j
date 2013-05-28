@@ -31,8 +31,6 @@ keep_logical_logs=true
 #relationship_keys_indexable=name,age
 
 <% if @enable_ha %>
-    ha.server=<%= @ha_server %>
-    ha.machine_id=<%= @ha_machine_id %>
-
-    ha.zoo_keeper_servers=<%= @coordinator_addresses.map { |addr| "#{addr}:#{@coordinator_port}"}.join(",") %>
+    ha.initial_hosts=<%= @ha_initial_hosts %>
+    ha.zoo_keeper_servers=<%= @coordinator_addresses %>
 <% end %>
