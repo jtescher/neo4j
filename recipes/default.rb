@@ -18,11 +18,11 @@ end
 # Set $NEO4J_HOME
 include_recipe "neo4j::set_neo4j_home"
 
-neo4j_tar_gz = "#{Chef::Config[:file_cache_path]}/neo4j-community-#{node[:neo4j][:version]}.tar.gz"
+neo4j_tar_gz = "#{Chef::Config[:file_cache_path]}/neo4j-enterprise-#{node[:neo4j][:version]}.tar.gz"
 
 # Download Neo4j Archive
 remote_file neo4j_tar_gz do
-  source "http://dist.neo4j.org/neo4j-community-#{node[:neo4j][:version]}-unix.tar.gz"
+  source "http://dist.neo4j.org/neo4j-enterprise-#{node[:neo4j][:version]}-unix.tar.gz"
   action :create_if_missing
 end
 
@@ -31,7 +31,7 @@ bash "unpack neo4j #{neo4j_tar_gz}" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
     tar -zxf #{neo4j_tar_gz}
-    mv neo4j-community-#{node[:neo4j][:version]} #{node[:neo4j][:neo4j_home]}
+    mv neo4j-enterprise-#{node[:neo4j][:version]} #{node[:neo4j][:neo4j_home]}
   EOH
   not_if { ::FileTest.exists?(node[:neo4j][:neo4j_home]) }
 end

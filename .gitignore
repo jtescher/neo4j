@@ -6,6 +6,7 @@ Berksfile.lock
 \#*#
 .*.sw[a-z]
 *.un~
+*.DS_Store
 /cookbooks
 
 # Bundler

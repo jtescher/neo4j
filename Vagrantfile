@@ -75,7 +75,7 @@ Vagrant.configure("2") do |config|
       :java => {
         :install_flavor => 'openjdk',
         :jdk_version => '7',
-        :java_home => '/usr/lib/jvm/java-1.7.0-openjdk-amd64'
+        :java_home => '/usr/lib/jvm/java-7-openjdk-amd64'
       },
       :neo4j => {
         :ha => { enabled: true },
