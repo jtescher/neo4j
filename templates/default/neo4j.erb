@@ -31,6 +31,7 @@ keep_logical_logs=true
 #relationship_keys_indexable=name,age
 
 <% if @enable_ha %>
+    ha.server_id=<%= @ha_server_id %>
     ha.initial_hosts=<%= @ha_initial_hosts %>
     ha.zoo_keeper_servers=<%= @coordinator_addresses %>
 <% end %>

@@ -14,6 +14,7 @@ set_unless[:neo4j][:webadmin_management_uri] = '/db/manage/'
 
 # Instance Neo4j config
 set_unless[:neo4j][:ha][:enable] = true
+set_unless[:neo4j][:ha][:server_id] = 1
 set_unless[:neo4j][:ha][:initial_hosts] = 'localhost:5001'
 
 # Coordinator config
