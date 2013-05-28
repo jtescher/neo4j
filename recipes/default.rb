@@ -121,6 +121,8 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
   owner node[:neo4j][:user]
   group node[:neo4j][:group]
   variables(
+    :enable_ha => node[:neo4j][:ha][:enable],
+    :ha_server_id => node[:neo4j][:ha][:server_id],
     :ha_initial_hosts => node[:neo4j][:ha][:initial_hosts],
     :coordinator_addresses => coordinator_addresses
   )
