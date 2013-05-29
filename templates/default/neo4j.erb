@@ -32,6 +32,6 @@ keep_logical_logs=true
 
 <% if @enable_ha %>
     ha.server_id=<%= @ha_server_id %>
+    ha.cluster_server=<%= @ha_cluster_server %>
     ha.initial_hosts=<%= @ha_initial_hosts %>
-    ha.zoo_keeper_servers=<%= @coordinator_addresses %>
 <% end %>

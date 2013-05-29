@@ -110,22 +110,26 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j-server.properties" do
   )
 end
 
-coordinator_addresses = node[:neo4j][:coordinator][:cluster].map do |address|
-  "#{address}:#{node[:neo4j][:coordinator][:port]}"
-end.join(',')
-
 # Neo4j instance properties config
 template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
-  source "neo4j.erb"
+  source 'neo4j.erb'
   mode 0444
   owner node[:neo4j][:user]
   group node[:neo4j][:group]
   variables(
     :enable_ha => node[:neo4j][:ha][:enable],
     :ha_server_id => node[:neo4j][:ha][:server_id],
-    :ha_initial_hosts => node[:neo4j][:ha][:initial_hosts],
-    :coordinator_addresses => coordinator_addresses
+    :ha_cluster_server => node[:neo4j][:ha][:cluster_server],
+    :ha_initial_hosts => node[:neo4j][:ha][:initial_hosts]
   )
+end
+
+# Neo4j wrapper config
+template "#{node[:neo4j][:neo4j_home]}/conf/neo4j-wrapper.conf" do
+  source 'neo4j-wrapper.conf.erb'
+  mode 0444
+  owner node[:neo4j][:user]
+  group node[:neo4j][:group]
 end
 
 # High Availability Neo4j Coordinator config
