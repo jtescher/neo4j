@@ -9,7 +9,6 @@
 
 include_recipe 'apt'
 include_recipe 'java::openjdk'
-include_recipe 'zookeeper'
 
 package "default-jre-headless" do
   action :install
