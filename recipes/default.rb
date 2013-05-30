@@ -119,6 +119,7 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
     :enable_ha => node[:neo4j][:ha][:enable],
     :ha_server_id => node[:neo4j][:ha][:server_id],
     :ha_cluster_server => node[:neo4j][:ha][:cluster_server],
+    :ha_server => node[:neo4j][:ha][:server],
     :ha_initial_hosts => node[:neo4j][:ha][:initial_hosts]
   )
 end
