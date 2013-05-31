@@ -78,13 +78,12 @@ Vagrant.configure("2") do |config|
         :java_home => '/usr/lib/jvm/java-7-openjdk-amd64'
       },
       :neo4j => {
-        :ha => { enabled: true },
-        :coordinator => { cluster: ['33.33.33.1', '33.33.33.2'] }
+        :ha => { enabled: true }
       }
     }
 
     chef.run_list = [
-        "recipe[neo4j::default]"
+        "recipe[neo4j::arbiter]"
     ]
   end
 end

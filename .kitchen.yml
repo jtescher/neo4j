@@ -35,5 +35,3 @@ suites:
     neo4j:
       ha:
         enabled: true
-      coordinator:
-        cluster: ['33.33.33.1', '33.33.33.2']
