@@ -17,8 +17,8 @@ end
 include_recipe 'neo4j::install'
 
 # Symlink neo4j-arbiter script
-link "#{node[:neo4j][:neo4j_home]}/bin/neo4j-arbiter" do
-  to '/etc/init.d/neo4j-arbiter'
+link '/etc/init.d/neo4j-arbiter' do
+  to "#{node[:neo4j][:neo4j_home]}/bin/neo4j-arbiter"
 end
 
 # Start the Neo4j Arbiter
