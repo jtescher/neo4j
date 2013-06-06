@@ -83,7 +83,7 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
-        "recipe[neo4j::arbiter]"
+        "recipe[neo4j]"
     ]
   end
 end

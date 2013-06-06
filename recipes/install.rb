@@ -91,18 +91,44 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j-server.properties" do
 end
 
 # Neo4j instance properties config
-template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
-  source 'neo4j.erb'
-  mode 0444
-  owner node[:neo4j][:user]
-  group node[:neo4j][:group]
-  variables(
-    :enable_ha => node[:neo4j][:ha][:enable],
-    :ha_server_id => node[:neo4j][:ha][:server_id],
-    :ha_cluster_server => node[:neo4j][:ha][:cluster_server],
-    :ha_server => node[:neo4j][:ha][:server],
-    :ha_initial_hosts => node[:neo4j][:ha][:initial_hosts]
-  )
+if node.attribute?(:opsworks)
+  layers = node[:opsworks][:layers].keys
+  public_dns_names = [node[:opsworks][:instance][:public_dns_name]]
+  layers.each do |layer|
+    instances = node[:opsworks][:layers][layer][:instances].keys
+    instances.each do |instance|
+      public_dns_names << node[:opsworks][:layers][layer][:instances][instance][:public_dns_name]
+    end
+  end
+  initial_hosts = public_dns_names.map {|dns_name| "#{dns_name}:5001" } .join(',')
+
+  template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
+    source 'neo4j.erb'
+    mode 0444
+    owner node[:neo4j][:user]
+    group node[:neo4j][:group]
+    variables(
+      :enable_ha => node[:neo4j][:ha][:enable],
+      :ha_server_id => node[:opsworks][:instance][:private_ip].split('.').map(&:to_i).inject(:+),
+      :ha_cluster_server => "#{node[:opsworks][:instance][:public_dns_name]}:5001",
+      :ha_server => "#{node[:opsworks][:instance][:public_dns_name]}:6361",
+      :ha_initial_hosts => initial_hosts
+    )
+  end
+else
+  template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
+    source 'neo4j.erb'
+    mode 0444
+    owner node[:neo4j][:user]
+    group node[:neo4j][:group]
+    variables(
+      :enable_ha => node[:neo4j][:ha][:enable],
+      :ha_server_id => node[:neo4j][:ha][:server_id],
+      :ha_cluster_server => node[:neo4j][:ha][:cluster_server],
+      :ha_server => node[:neo4j][:ha][:server],
+      :ha_initial_hosts => node[:neo4j][:ha][:initial_hosts]
+    )
+  end
 end
 
 # Neo4j wrapper config

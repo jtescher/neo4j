@@ -14,17 +14,12 @@ package "default-jre-headless" do
   action :install
 end
 
-# HACK FOR NOT BEING ABLE TO SET INSTANCE SPECIFIC CHEF JSON FOR SERVER ID
-node.override[:ha][:server_id] = 2
-
 include_recipe 'neo4j::install'
 
 # Copy neo4j-arbiter script
 template '/etc/init.d/neo4j-arbiter' do
   source 'neo4j-arbiter.erb'
   mode 0744
-  owner node[:neo4j][:user]
-  group node[:neo4j][:group]
 end
 
 # Start the Neo4j Arbiter
