@@ -18,3 +18,4 @@ default[:neo4j][:ha][:server_id] = 1
 default[:neo4j][:ha][:cluster_server] = 'localhost:5001'
 default[:neo4j][:ha][:server] = 'localhost:6361'
 default[:neo4j][:ha][:initial_hosts] = 'localhost:5001'
+default[:neo4j][:ha][:pull_interval] = '0s'

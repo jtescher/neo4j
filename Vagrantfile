@@ -78,7 +78,7 @@ Vagrant.configure("2") do |config|
         :java_home => '/usr/lib/jvm/java-7-openjdk-amd64'
       },
       :neo4j => {
-        :ha => { enabled: true }
+        :ha => { :enabled => true }
       }
     }
 
