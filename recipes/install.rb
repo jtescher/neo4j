@@ -113,7 +113,7 @@ if node.attribute?(:opsworks)
       :ha_cluster_server => "#{node[:opsworks][:instance][:public_dns_name]}:5001",
       :ha_server => "#{node[:opsworks][:instance][:public_dns_name]}:6361",
       :ha_initial_hosts => initial_hosts,
-      :pull_interval => node[:neo4j][:ha][:pull_interval]
+      :ha_pull_interval => node[:neo4j][:ha][:pull_interval]
     )
   end
 else
@@ -128,7 +128,7 @@ else
       :ha_cluster_server => node[:neo4j][:ha][:cluster_server],
       :ha_server => node[:neo4j][:ha][:server],
       :ha_initial_hosts => node[:neo4j][:ha][:initial_hosts],
-      :pull_interval => node[:neo4j][:ha][:pull_interval]
+      :ha_pull_interval => node[:neo4j][:ha][:pull_interval]
     )
   end
 end
