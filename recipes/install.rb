@@ -30,8 +30,9 @@ end
 
 # Create neo4j user
 user node[:neo4j][:user] do
-  home node[:neo4j][:neo4j_home]
+  home    node[:neo4j][:neo4j_home]
   comment "Neo4j Administrator"
+  shell   "/bin/bash"
 end
 
 # Create the neo4j data directory
