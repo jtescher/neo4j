@@ -32,8 +32,6 @@ end
 user node[:neo4j][:user] do
   home node[:neo4j][:neo4j_home]
   comment "Neo4j Administrator"
-  supports :manage_home => false
-  system true
 end
 
 # Create the neo4j data directory
