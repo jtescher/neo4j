@@ -90,7 +90,7 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j-server.properties" do
 end
 
 # Neo4j instance properties config
-if node.attribute?(:opsworks)
+if node[:neo4j][:ha][:enable] && node.attribute?(:opsworks)
   layers = node[:opsworks][:layers].keys
   public_dns_names = [node[:opsworks][:instance][:public_dns_name]]
   layers.each do |layer|
