@@ -92,14 +92,14 @@ end
 # Neo4j instance properties config
 if node[:neo4j][:ha][:enable] && node.attribute?(:opsworks)
   layers = node[:opsworks][:layers].keys
-  public_dns_names = [node[:opsworks][:instance][:public_dns_name]]
+  private_ip_addresses = [node[:opsworks][:instance][:private_ip]]
   layers.each do |layer|
     instances = node[:opsworks][:layers][layer][:instances].keys
     instances.each do |instance|
-      public_dns_names << node[:opsworks][:layers][layer][:instances][instance][:public_dns_name]
+      private_ip_addresses << node[:opsworks][:layers][layer][:instances][instance][:private_ip]
     end
   end
-  initial_hosts = public_dns_names.map {|dns_name| "#{dns_name}:5001" } .join(',')
+  initial_hosts = private_ip_addresses.map {|private_ip| "#{private_ip}:5001" } .join(',')
 
   template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
     source 'neo4j.erb'
@@ -109,8 +109,8 @@ if node[:neo4j][:ha][:enable] && node.attribute?(:opsworks)
     variables(
       :enable_ha => node[:neo4j][:ha][:enable],
       :ha_server_id => node[:opsworks][:instance][:private_ip].split('.').map(&:to_i).inject(:+),
-      :ha_cluster_server => "#{node[:opsworks][:instance][:public_dns_name]}:5001",
-      :ha_server => "#{node[:opsworks][:instance][:public_dns_name]}:6361",
+      :ha_cluster_server => "#{node[:opsworks][:instance][:private_ip]}:5001",
+      :ha_server => "#{node[:opsworks][:instance][:private_ip]}:6361",
       :ha_initial_hosts => initial_hosts,
       :ha_pull_interval => node[:neo4j][:ha][:pull_interval]
     )
