@@ -10,9 +10,9 @@
 include_recipe 'apt'
 include_recipe 'java'
 
-package "default-jre-headless" do
-  action :install
-end
+#package "default-jre-headless" do
+#  action :install
+#end
 
 include_recipe 'neo4j::install'
 

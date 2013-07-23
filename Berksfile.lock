@@ -1,5 +1,5 @@
 {
-  "sha": "836f56bbb9d000f5d68bcb1c325e6c22de2ec0cb",
+  "sha": "9598dd28d4b487959bd2f1111e61da9db3ee9ef3",
   "sources": {
     "neo4j": {
       "path": "."
@@ -7,15 +7,15 @@
     "newrelic-sysmond": {
       "locked_version": "1.3.2",
       "git": "git://github.com/jtescher/chef-newrelic-sysmond.git",
-      "ref": "5b5ee981dea8e09d282d133bf181125320b0dff0"
+      "ref": "c3715ec1f14e682f42bd6d72c0e5feb4d3e247bd"
     },
     "apt": {
       "locked_version": "1.9.2"
     },
     "java": {
       "locked_version": "1.10.0",
-      "git": "git://github.com/amazonwebservices/opsworks-example-cookbooks.git",
-      "ref": "6b9835038cc0964f906cacd2ce05bde6ea842143",
+      "git": "git://github.com/jtescher/opsworks-example-cookbooks.git",
+      "ref": "c3e2ed6824c1270841e5c95829419cf2422af26d",
       "rel": "java"
     },
     "windows": {
