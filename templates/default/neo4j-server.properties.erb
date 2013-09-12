@@ -42,17 +42,11 @@ org.neo4j.server.webserver.https.key.location=conf/ssl/snakeoil.key
 # keystore there, it will get deleted when the server starts)
 org.neo4j.server.webserver.https.keystore.location=data/keystore
 
-<% if @enable_ha %>
-# High Availability Mode
-org.neo4j.server.database.mode=HA
-<% end %>
-
-
 #*****************************************************************
 # Administration client configuration
 #*****************************************************************
 
-# location of the servers round-robin database directory. Possible values:
+# location of the servers round-robin database directory. possible values:
 # - absolute path like /var/rrd
 # - path relative to the server working directory like data/rrd
 # - commented out, will default to the database data directory.
@@ -60,18 +54,26 @@ org.neo4j.server.webadmin.rrdb.location=data/rrd
 
 # REST endpoint for the data API
 # Note the / in the end is mandatory
-# e.g. org.neo4j.server.webadmin.data.uri=/db/data/
 org.neo4j.server.webadmin.data.uri=<%= @webadmin_data_uri %>
 
 # REST endpoint of the administration API (used by Webadmin)
-# org.neo4j.server.webadmin.management.uri=/db/manage/
 org.neo4j.server.webadmin.management.uri=<%= @webadmin_management_uri %>
 
 # Low-level graph engine tuning file
 org.neo4j.server.db.tuning.properties=<%= @conf_dir %>/neo4j.properties
 
+
 # The console services to be enabled
 org.neo4j.server.manage.console_engines=gremlin, shell
+
+# Allowed values:
+# HA - High Availability
+# SINGLE - Single mode, default.
+# To run in High Availability mode, configure the
+# neo4j.properties config file, then uncomment this line:
+<% if @enable_ha %>
+org.neo4j.server.database.mode=HA
+<% end %>
 
 # Comma separated list of JAX-RS packages containing JAX-RS resources, one
 # package name for each mountpoint. The listed package names will be loaded

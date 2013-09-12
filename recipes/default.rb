@@ -10,11 +10,8 @@
 include_recipe 'apt'
 include_recipe 'java'
 
-#package "default-jre-headless" do
-#  action :install
-#end
-
 include_recipe 'neo4j::install'
+include_recipe 'neo4j::configure'
 
 # Start Neo4j
 execute './neo4j-service start' do

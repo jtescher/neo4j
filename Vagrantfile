@@ -83,7 +83,9 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
-        "recipe[neo4j]"
+      "recipe[neo4j]"
     ]
   end
+
+  config.omnibus.chef_version = '11.4.0'
 end

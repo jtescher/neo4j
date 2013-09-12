@@ -1,5 +1,6 @@
 wrapper.java.additional=-Dorg.neo4j.server.properties=conf/neo4j-server.properties
 wrapper.java.additional=-Djava.util.logging.config.file=conf/logging.properties
+wrapper.java.additional=-Dlog4j.configuration=file:conf/log4j.properties
 
 # Java Additional Parameters
 wrapper.java.additional=-XX:+UseConcMarkSweepGC
@@ -32,7 +33,7 @@ wrapper.java.additional=-XX:+CMSClassUnloadingEnabled
 #wrapper.java.initmemory=3
 
 # Maximum Java Heap Size (in MB)
-#wrapper.java.maxmemory=64
+wrapper.java.maxmemory=<%= @java_maxmemory %>
 
 # Application parameters.  Add parameters as needed starting from 1
 wrapper.java.app.mainclass=org.neo4j.server.Bootstrapper
@@ -50,8 +51,5 @@ wrapper.lockfile=../data/neo4j-server.lck
 #  service can then be reinstalled.
 
 # Name of the service
-wrapper.name=neo4jwrapper.user=neo4j
-wrapper.user.created=false
+wrapper.name=neo4j
 
-# FIX IPv6 Default issue http://stackoverflow.com/questions/6217766/how-to-set-canonical-hostname-in-linux
-wrapper.java.additional.3=-Djava.net.preferIPv4Stack=true
