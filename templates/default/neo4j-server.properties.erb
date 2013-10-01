@@ -97,3 +97,8 @@ org.neo4j.server.http.log.enabled=false
 # changing the output format is less so, since it is configured to use the
 # ubiquitous common log format
 org.neo4j.server.http.log.config=conf/neo4j-http-logging.xml
+
+# Kill queries that run for more than 30 seconds
+<% if @webserver_limit_executiontime %>
+  org.neo4j.server.webserver.limit.executiontime=<%= @webserver_limit_executiontime %>
+<% end %>

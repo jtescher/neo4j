@@ -20,7 +20,8 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j-server.properties" do
     :webadmin_data_uri => node[:neo4j][:webadmin_data_uri],
     :webadmin_management_uri => node[:neo4j][:webadmin_management_uri],
     :enable_ha => node[:neo4j][:ha][:enable],
-    :conf_dir => "#{node[:neo4j][:neo4j_home]}/conf"
+    :conf_dir => "#{node[:neo4j][:neo4j_home]}/conf",
+    :webserver_limit_executiontime => node[:neo4j][:webserver_limit_executiontime]
   )
 end
 
@@ -61,7 +62,8 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
     :ha_server => ha_server,
     :ha_initial_hosts => ha_initial_hosts,
     :ha_pull_interval => node[:neo4j][:ha][:pull_interval],
-    :ha_tx_push_factor => node[:neo4j][:ha][:tx_push_factor]
+    :ha_tx_push_factor => node[:neo4j][:ha][:tx_push_factor],
+    :execution_guard_enabled => node[:neo4j][:ha][:execution_guard_enabled]
   )
 end
 
