@@ -64,7 +64,7 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j.properties" do
     :ha_pull_interval => node[:neo4j][:ha][:pull_interval],
     :ha_tx_push_factor => node[:neo4j][:ha][:tx_push_factor],
     :execution_guard_enabled => node[:neo4j][:ha][:execution_guard_enabled],
-    :cache_type => node[:neo4j][:ha][:cache_type],
+    :cache_type => node[:neo4j][:ha][:cache_type]
   )
 end
 
