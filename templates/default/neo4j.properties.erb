@@ -94,5 +94,8 @@ ha.tx_push_factor=<%= @ha_tx_push_factor %>
 # Specify custom shell port (default is 1337).
 #remote_shell_port=1234
 
-# Kill overly long running querries to avoid CPU issues
+# Kill overly long running queries to avoid CPU issues
 execution_guard_enabled=<%= @execution_guard_enabled %>
+
+# Specify cache type
+cache_type=<%= @cache_type %>

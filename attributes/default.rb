@@ -28,3 +28,4 @@ default[:neo4j][:ha][:initial_hosts]            = ':5001,:5002,:5003'
 default[:neo4j][:ha][:pull_interval]            = '10'
 default[:neo4j][:ha][:tx_push_factor]           = 1
 default[:neo4j][:ha][:execution_guard_enabled]  = true
+default[:neo4j][:ha][:cache_type]               = 'soft'
