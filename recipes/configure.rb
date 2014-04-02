@@ -75,6 +75,7 @@ template "#{node[:neo4j][:neo4j_home]}/conf/neo4j-wrapper.conf" do
   owner node[:neo4j][:user]
   group node[:neo4j][:group]
   variables(
-    :java_maxmemory => node[:neo4j][:java_maxmemory]
+    :java_maxmemory => node[:neo4j][:java_maxmemory],
+    :monitoring_agent_jar_path => node[:neo4j][:monitoring_agent_jar_path]
   )
 end
