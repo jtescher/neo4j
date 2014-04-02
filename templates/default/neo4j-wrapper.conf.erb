@@ -45,6 +45,11 @@ wrapper.java.additional=-XX:+CMSClassUnloadingEnabled
 #wrapper.java.initmemory=16
 wrapper.java.maxmemory=<%= @java_maxmemory %>
 
+<% if @monitoring_agent_jar_path %>
+# New Relic Server Monitoring
+wrapper.java.additional.2=-javaagent:<%= @monitoring_agent_jar_path %>
+<% end %>
+
 #********************************************************************
 # Wrapper settings
 #********************************************************************

@@ -7,6 +7,7 @@ default[:neo4j][:nofile_limit]                  = 40000
 
 # Neo4j Wrapper config
 default[:neo4j][:java_maxmemory]                = '512'
+default[:neo4j][:monitoring_agent_jar_path]     = nil
 
 # Server Neo4j Server config
 default[:neo4j][:database_location]             = 'data/graph.db'
